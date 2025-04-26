@@ -1,7 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/images/ShopEase-logo.svg";
+import { useCart } from "../providers/cart/useCart";
 export const Header = () => {
+  const { shouldDisplayCart, setShouldDisplayCart } = useCart();
+  const toggleDisplayCart = () => setShouldDisplayCart(!shouldDisplayCart);
+
   return (
     <header>
       <div className="logo-container">
@@ -29,11 +33,14 @@ export const Header = () => {
         </ul>
       </nav>
       <div className="cart-container">
-        <div className="cart-icon">
+        <div className="cart-icon" onClick={toggleDisplayCart}>
           <FontAwesomeIcon icon={faShoppingCart} />
           <span className="cart-count">0</span>
         </div>
-        <div className="cart-dropdown" style={{ display: "none" }}>
+        <div
+          className="cart-dropdown"
+          style={{ display: shouldDisplayCart ? "" : "none" }}
+        >
           <div className="cart-items">
             {/* Cart items will be added here by JavaScript */}
           </div>
