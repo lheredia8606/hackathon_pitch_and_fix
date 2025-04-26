@@ -60,12 +60,12 @@ export const Footer = () => {
       <div className="footer-columns">
         {columns.map((column) => {
           return (
-            <div className="footer-column">
+            <div key={column.columnName} className="footer-column">
               <h3>{column.columnName}</h3>
               <ul className="social-links">
                 {column.rows.map((row, index) => {
                   return (
-                    <li key={index}>
+                    <li key={column.columnName + index}>
                       <a href={row.ref}>
                         {row.icon && <FontAwesomeIcon icon={row.icon} />}
                         {row.rowName}

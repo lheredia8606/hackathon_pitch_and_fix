@@ -1,13 +1,17 @@
 import { ProductCard } from "./ProductCard";
-import { allProducts } from "../assets/globals/constants";
+import { useProduct } from "../providers/product/useProduct";
+
 export const FeaturedProducts = () => {
+  const { allProducts } = useProduct();
   return (
     <section className="featured-products">
       <h2>Featured Products</h2>
       <div className="product-grid">
-        {allProducts.map((product) => {
-          return <ProductCard key={product.id} product={product} />;
-        })}
+        {allProducts
+          .filter((product) => product.featured)
+          .map((product) => {
+            return <ProductCard key={product.id} product={product} />;
+          })}
       </div>
     </section>
   );

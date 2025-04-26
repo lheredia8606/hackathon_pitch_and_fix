@@ -23,4 +23,5 @@ export type TProduct = {
   ratingAvg: number;
   ratingCount: number;
   category: TProductCategory;
+  featured: boolean;
 };

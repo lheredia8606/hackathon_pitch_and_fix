@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/images/ShopEase-logo.svg";
 import { useCart } from "../providers/cart/useCart";
+import { Link } from "@tanstack/react-router";
 export const Header = () => {
   const { shouldDisplayCart, setShouldDisplayCart } = useCart();
   const toggleDisplayCart = () => setShouldDisplayCart(!shouldDisplayCart);
@@ -14,18 +15,16 @@ export const Header = () => {
       <nav className="main-nav">
         <ul id="nav-items">
           <li className="nav-item">
-            <a href="index.html" className="active">
-              Home
-            </a>
+            <Link to="/">Home</Link>
           </li>
           <li className="nav-item">
-            <a href="pages/products.html">Products</a>
+            <Link to="/products">Products</Link>
           </li>
           <li className="nav-item">
             <a href="pages/categories.html">Categories</a>
           </li>
           <li className="nav-item">
-            <a href="pages/about.html">About Us</a>
+            <Link to="/about">About Us</Link>
           </li>
           <li className="nav-item">
             <a href="pages/contact.html">Contact</a>
