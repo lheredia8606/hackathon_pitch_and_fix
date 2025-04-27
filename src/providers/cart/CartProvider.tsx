@@ -2,25 +2,20 @@ import { ReactNode, useEffect, useState } from "react";
 import { CartContext, cartProduct } from "./useCart";
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartProducts, setCartProducts] = useState<cartProduct[]>([]);
   const [shouldDisplayCart, setShouldDisplayCart] = useState<boolean>(false);
-  // const {getProductById} = useProduct()
-  useEffect(() => {
-    loadCart();
-  }, []);
-
-  // Check for existing cart in localStorage
-  const loadCart = () => {
-    const savedCart = localStorage.getItem("shopease_cart");
-    if (savedCart) {
-      setCartProducts(JSON.parse(savedCart));
+  const [cartProducts, setCartProducts] = useState<cartProduct[]>(
+    (): cartProduct[] => {
+      const savedCart = localStorage.getItem("shopease_cart");
+      if (savedCart) {
+        return JSON.parse(savedCart);
+      }
+      return [];
     }
-  };
+  );
 
-  // Save cart to localStorage
-  const saveCart = () => {
+  useEffect(() => {
     localStorage.setItem("shopease_cart", JSON.stringify(cartProducts));
-  };
+  }, [cartProducts]);
 
   // Add product to cart
   const addToCart = (productId: string) => {
@@ -31,12 +26,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     if (existingItem) {
       // Increase quantity if already in cart
-      existingItem.qty += 1;
+      setCartProducts(
+        [...cartProducts].map((product) => {
+          if (product.productId === productId) {
+            product.qty += 1;
+          }
+          return product;
+        })
+      );
     } else {
       const updatedCart = [...cartProducts, { productId, qty: 1 }];
       setCartProducts(updatedCart);
     }
-    saveCart();
   };
 
   // Remove item from cart
@@ -45,9 +46,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       (item) => item.productId !== productId
     );
     setCartProducts(updatedCart);
-
-    // Save cart and update UI
-    saveCart();
   };
 
   return (
