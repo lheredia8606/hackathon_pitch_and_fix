@@ -4,6 +4,7 @@ import { CartContext, cartProduct } from "./useCart";
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartProducts, setCartProducts] = useState<cartProduct[]>([]);
   const [shouldDisplayCart, setShouldDisplayCart] = useState<boolean>(false);
+  // const {getProductById} = useProduct()
   useEffect(() => {
     loadCart();
   }, []);
@@ -32,9 +33,20 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       // Increase quantity if already in cart
       existingItem.qty += 1;
     } else {
-      cartProducts.push({ productId, qty: 1 });
-      setCartProducts(cartProducts);
+      const updatedCart = [...cartProducts, { productId, qty: 1 }];
+      setCartProducts(updatedCart);
     }
+    saveCart();
+  };
+
+  // Remove item from cart
+  const removeFromCart = (productId: string) => {
+    const updatedCart = cartProducts.filter(
+      (item) => item.productId !== productId
+    );
+    setCartProducts(updatedCart);
+
+    // Save cart and update UI
     saveCart();
   };
 
@@ -46,6 +58,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         setShouldDisplayCart,
         shouldDisplayCart,
         addToCart,
+        removeFromCart,
       }}
     >
       {children}

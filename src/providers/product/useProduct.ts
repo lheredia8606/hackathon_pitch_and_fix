@@ -5,6 +5,7 @@ type TProductContextProps = {
   allProducts: TProduct[];
   setAllProducts: (products: TProduct[]) => void;
   getProductsByCategory: (category: string) => TProduct[];
+  getProductById: (id: string) => TProduct | undefined;
 };
 
 export const ProductContext = createContext<TProductContextProps | null>(null);

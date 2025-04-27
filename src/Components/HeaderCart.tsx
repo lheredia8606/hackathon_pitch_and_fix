@@ -2,12 +2,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../providers/cart/useCart";
 import { useEffect, useRef } from "react";
+import { useProduct } from "../providers/product/useProduct";
 
 export const HeaderCart = () => {
-  const { cartProducts } = useCart();
-  const { shouldDisplayCart, setShouldDisplayCart } = useCart();
+  const {
+    cartProducts,
+    setShouldDisplayCart,
+    shouldDisplayCart,
+    removeFromCart,
+  } = useCart();
+  const { getProductById } = useProduct();
   const toggleDisplayCart = () => setShouldDisplayCart(!shouldDisplayCart);
   const cartRef = useRef<HTMLDivElement>(null);
+  const getCartTotal = () => {
+    return cartProducts.reduce((acc, val) => {
+      const product = getProductById(val.productId);
+      if (product)
+        return acc + Math.round(val.qty * product.salePrice * 100) / 100;
+      return acc;
+    }, 0);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -32,11 +46,32 @@ export const HeaderCart = () => {
         style={{ display: shouldDisplayCart ? "block" : "none" }}
       >
         <div className="cart-items">
-          {/* Cart items will be added here by JavaScript */}
+          {cartProducts.length === 0 && (
+            <p className="empty-cart-message">Your cart is empty</p>
+          )}
+          {cartProducts.map(({ productId, qty }) => {
+            const product = getProductById(productId);
+            if (product)
+              return (
+                <div className="cart-dropdown-item" key={productId}>
+                  <div className="item-details">
+                    <h4>{`${product.title} (${qty})`}</h4>
+                    <p>${Math.round(qty * product.salePrice * 100) / 100}</p>
+                  </div>
+                  <button
+                    className="remove-item-btn"
+                    onClick={() => removeFromCart(productId)}
+                  >
+                    ×
+                  </button>
+                </div>
+              );
+          })}
         </div>
         <div className="cart-total">
           <p>
-            Total: $<span id="cart-total-amount">0.00</span>
+            Total: $
+            <span id="cart-total-amount">{getCartTotal().toFixed(2)}</span>
           </p>
         </div>
         <button className="checkout-btn">Checkout</button>

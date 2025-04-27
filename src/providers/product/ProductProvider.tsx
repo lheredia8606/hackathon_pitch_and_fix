@@ -61,6 +61,9 @@ const productsArr: TProduct[] = [
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [allProducts, setAllProducts] = useState<TProduct[]>(productsArr);
 
+  const getProductById = (id: string) => {
+    return allProducts.find((product) => product.id === id);
+  };
   const getProductsByCategory = (category: string): TProduct[] => {
     if (category === "All") {
       return allProducts;
@@ -70,7 +73,12 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   };
   return (
     <ProductContext.Provider
-      value={{ allProducts, setAllProducts, getProductsByCategory }}
+      value={{
+        allProducts,
+        setAllProducts,
+        getProductsByCategory,
+        getProductById,
+      }}
     >
       {children}
     </ProductContext.Provider>
