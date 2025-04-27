@@ -1,7 +1,8 @@
-import { allProducts } from "../assets/globals/constants";
+import { useProduct } from "../providers/product/useProduct";
 import { ProductCard } from "./ProductCard";
 
 export const Cart = () => {
+  const { allProducts } = useProduct();
   return (
     <main className="cart-page-container">
       <h1 className="page-title">Shopping Cart</h1>

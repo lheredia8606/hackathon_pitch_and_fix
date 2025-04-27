@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
 import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
 import { TProduct } from "../types/types";
+import { useCart } from "../providers/cart/useCart";
 
 type TProductCardProps = {
   product: TProduct;
@@ -18,8 +19,11 @@ export const ProductCard = ({
     salePrice,
     tag,
     title,
+    id,
   },
 }: TProductCardProps) => {
+  const { addToCart } = useCart();
+
   const getRatingFullStars = (rating: number) => {
     return (
       <React.Fragment>
@@ -61,12 +65,7 @@ export const ProductCard = ({
 
           <span className="rating-count">({ratingCount})</span>
         </div>
-        <button
-          className="add-to-cart-btn"
-          data-product-id="1"
-          data-product-name="Wireless Headphones"
-          data-product-price="99.99"
-        >
+        <button className="add-to-cart-btn" onClick={() => addToCart(id)}>
           Add to Cart
         </button>
       </div>

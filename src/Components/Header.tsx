@@ -1,11 +1,18 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/images/ShopEase-logo.svg";
-import { useCart } from "../providers/cart/useCart";
 import { Link } from "@tanstack/react-router";
+import { HeaderCart } from "./HeaderCart";
 export const Header = () => {
-  const { shouldDisplayCart, setShouldDisplayCart } = useCart();
-  const toggleDisplayCart = () => setShouldDisplayCart(!shouldDisplayCart);
+  type TNavLi = {
+    address: string;
+    text: string;
+  };
+  const navLi: TNavLi[] = [
+    { address: "/", text: "Home" },
+    { address: "/products", text: "Products" },
+    { address: "/categories", text: "Categories" },
+    { address: "/about", text: "About Us" },
+    { address: "/contact", text: "Contact" },
+  ];
 
   return (
     <header>
@@ -14,43 +21,16 @@ export const Header = () => {
       </div>
       <nav className="main-nav">
         <ul id="nav-items">
-          <li className="nav-item">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/products">Products</Link>
-          </li>
-          <li className="nav-item">
-            <a href="pages/categories.html">Categories</a>
-          </li>
-          <li className="nav-item">
-            <Link to="/about">About Us</Link>
-          </li>
-          <li className="nav-item">
-            <a href="pages/contact.html">Contact</a>
-          </li>
+          {navLi.map((li) => {
+            return (
+              <li key={li.text} className="nav-item">
+                <Link to={li.address}>{li.text}</Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
-      <div className="cart-container">
-        <div className="cart-icon" onClick={toggleDisplayCart}>
-          <FontAwesomeIcon icon={faShoppingCart} />
-          <span className="cart-count">0</span>
-        </div>
-        <div
-          className="cart-dropdown"
-          style={{ display: shouldDisplayCart ? "" : "none" }}
-        >
-          <div className="cart-items">
-            {/* Cart items will be added here by JavaScript */}
-          </div>
-          <div className="cart-total">
-            <p>
-              Total: $<span id="cart-total-amount">0.00</span>
-            </p>
-          </div>
-          <button className="checkout-btn">Checkout</button>
-        </div>
-      </div>
+      <HeaderCart />
     </header>
   );
 };

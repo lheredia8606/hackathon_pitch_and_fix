@@ -1,15 +1,15 @@
 import { createContext, useContext } from "react";
-import { TProduct } from "../../types/types";
 
-export type cartProducts = {
-  product: TProduct[];
+export type cartProduct = {
+  productId: string;
   qty: number;
 };
 type TCartContextProps = {
-  cartProducts: cartProducts[];
-  setCartProducts: (products: cartProducts[]) => void;
+  cartProducts: cartProduct[];
+  setCartProducts: (products: cartProduct[]) => void;
   shouldDisplayCart: boolean;
   setShouldDisplayCart: (display: boolean) => void;
+  addToCart: (productId: string) => void;
 };
 
 export const CartContext = createContext<TCartContextProps | null>(null);
