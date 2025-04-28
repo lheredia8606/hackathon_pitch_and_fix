@@ -11,19 +11,20 @@ export const DropDownCart = () => {
     setShouldDisplayCart,
     shouldDisplayCart,
     removeFromCart,
+    getCartTotal,
   } = useCart();
   const navigate = useNavigate();
   const { getProductById } = useProduct();
   const toggleDisplayCart = () => setShouldDisplayCart(!shouldDisplayCart);
   const cartRef = useRef<HTMLDivElement>(null);
-  const getCartTotal = () => {
-    return cartProducts.reduce((acc, val) => {
-      const product = getProductById(val.productId);
-      if (product)
-        return acc + Math.round(val.qty * product.salePrice * 100) / 100;
-      return acc;
-    }, 0);
-  };
+  // const getCartTotal = () => {
+  //   return cartProducts.reduce((acc, val) => {
+  //     const product = getProductById(val.productId);
+  //     if (product)
+  //       return acc + Math.round(val.qty * product.salePrice * 100) / 100;
+  //     return acc;
+  //   }, 0);
+  // };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -72,8 +73,7 @@ export const DropDownCart = () => {
         </div>
         <div className="cart-total">
           <p>
-            Total: $
-            <span id="cart-total-amount">{getCartTotal().toFixed(2)}</span>
+            Total: $<span id="cart-total-amount">{getCartTotal()}</span>
           </p>
         </div>
         <button

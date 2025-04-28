@@ -11,6 +11,9 @@ type TCartContextProps = {
   setShouldDisplayCart: (display: boolean) => void;
   addToCart: (productId: string) => void;
   removeFromCart: (productId: string) => void;
+  getCartTotal: () => number;
+  increaseQty: (productId: string) => void;
+  decreaseQty: (productId: string) => void;
 };
 
 export const CartContext = createContext<TCartContextProps | null>(null);
