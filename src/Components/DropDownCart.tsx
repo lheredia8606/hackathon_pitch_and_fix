@@ -3,14 +3,16 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "../providers/cart/useCart";
 import { useEffect, useRef } from "react";
 import { useProduct } from "../providers/product/useProduct";
+import { useNavigate } from "@tanstack/react-router";
 
-export const HeaderCart = () => {
+export const DropDownCart = () => {
   const {
     cartProducts,
     setShouldDisplayCart,
     shouldDisplayCart,
     removeFromCart,
   } = useCart();
+  const navigate = useNavigate();
   const { getProductById } = useProduct();
   const toggleDisplayCart = () => setShouldDisplayCart(!shouldDisplayCart);
   const cartRef = useRef<HTMLDivElement>(null);
@@ -74,7 +76,15 @@ export const HeaderCart = () => {
             <span id="cart-total-amount">{getCartTotal().toFixed(2)}</span>
           </p>
         </div>
-        <button className="checkout-btn">Checkout</button>
+        <button
+          className="checkout-btn"
+          onClick={() => {
+            setShouldDisplayCart(false);
+            navigate({ to: "/cart" });
+          }}
+        >
+          Checkout
+        </button>
       </div>
     </div>
   );

@@ -1,8 +1,12 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useCart } from "../providers/cart/useCart";
 import { useProduct } from "../providers/product/useProduct";
 import { ProductCard } from "./ProductCard";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 export const Cart = () => {
-  const { allProducts } = useProduct();
+  const { cartProducts } = useCart();
+  const { allProducts, getProductById } = useProduct();
   return (
     <main className="cart-page-container">
       <h1 className="page-title">Shopping Cart</h1>
@@ -21,42 +25,47 @@ export const Cart = () => {
             </thead>
             <tbody id="cart-items-list">
               {/* Cart items will be loaded here dynamically */}
-
-              <tr className="cart-item" data-product-id="1">
-                <td className="product-info">
-                  <img
-                    src="../images/product1.jpg"
-                    alt="Wireless Headphones"
-                    className="cart-item-image"
-                  />
-                  <div className="product-details">
-                    <h3>Wireless Headphones</h3>
-                    <p className="product-variant">Color: Black</p>
-                  </div>
-                </td>
-                <td className="product-price">$99.99</td>
-                <td className="product-quantity">
-                  <div className="quantity-controls">
-                    <button className="quantity-decrease">-</button>
-                    <input
-                      type="number"
-                      value="1"
-                      max="10"
-                      className="quantity-input"
-                    />
-                    <button className="quantity-increase">+</button>
-                  </div>
-                </td>
-
-                <td className="product-total" data-total="99.99">
-                  $99.99
-                </td>
-                <td className="product-actions">
-                  <button className="remove-item-btn">
-                    <i className="fas fa-trash-alt"></i>
-                  </button>
-                </td>
-              </tr>
+              {cartProducts.map(({ productId, qty }) => {
+                const product = getProductById(productId);
+                if (product) {
+                  return (
+                    <tr className="cart-item" key={productId}>
+                      <td className="product-info">
+                        <img
+                          src={product.image}
+                          alt={product.title}
+                          className="cart-item-image"
+                        />
+                        <div className="product-details">
+                          <h3>{product.title}</h3>
+                          {/* change hardcoded black */}
+                          <p className="product-variant">Color: Black</p>
+                        </div>
+                      </td>
+                      <td className="product-price">{product.salePrice}</td>
+                      <td className="product-quantity">
+                        <div className="quantity-controls">
+                          <button className="quantity-decrease">-</button>
+                          <input
+                            type="number"
+                            value={qty}
+                            className="quantity-input"
+                          />
+                          <button className="quantity-increase">+</button>
+                        </div>
+                      </td>
+                      <td className="product-total">
+                        ${(product.salePrice * qty).toFixed(2)}
+                      </td>
+                      <td className="product-actions">
+                        <button className="remove-item-btn">
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                }
+              })}
             </tbody>
           </table>
         </div>

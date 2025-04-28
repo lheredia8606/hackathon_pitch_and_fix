@@ -1,6 +1,6 @@
 import logo from "../assets/images/ShopEase-logo.svg";
 import { Link } from "@tanstack/react-router";
-import { HeaderCart } from "./HeaderCart";
+import { DropDownCart } from "./DropDownCart";
 export const Header = () => {
   type TNavLi = {
     address: string;
@@ -30,7 +30,7 @@ export const Header = () => {
           })}
         </ul>
       </nav>
-      <HeaderCart />
+      <DropDownCart />
     </header>
   );
 };

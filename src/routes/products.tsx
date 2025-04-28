@@ -17,7 +17,7 @@ function RouteComponent() {
   };
   return (
     <>
-      <label htmlFor="categories">Category:</label>
+      <label htmlFor="categories">Category: </label>
       <select
         id="categories"
         name="categories"
