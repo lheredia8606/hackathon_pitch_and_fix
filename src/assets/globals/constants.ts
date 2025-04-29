@@ -30,3 +30,6 @@ export const allCategories: TProductCategoryProps[] = [
     linkTo: "pages/categories.html#sports",
   },
 ];
+
+//codes for discounts
+export const promoCodes = ["devslopes", "Devslopes"];

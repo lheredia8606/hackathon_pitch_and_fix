@@ -11,7 +11,7 @@ type TCartContextProps = {
   setShouldDisplayCart: (display: boolean) => void;
   addToCart: (productId: string) => void;
   removeFromCart: (productId: string) => void;
-  getCartTotal: () => number;
+  getCartSubTotal: () => number;
   increaseQty: (productId: string) => void;
   decreaseQty: (productId: string) => void;
 };

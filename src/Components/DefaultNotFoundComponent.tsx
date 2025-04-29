@@ -16,7 +16,7 @@ export const DefaultNotFoundComponent = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "150px" }}>
-      <h1>Something went wrong!</h1>
+      <h1>Page not found or not implemented yet!</h1>
       <h2>Redirecting Home</h2>
     </div>
   );

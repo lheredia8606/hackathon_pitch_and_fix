@@ -66,7 +66,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCartProducts(updatedCart);
   };
 
-  const getCartTotal = () => {
+  const getCartSubTotal = () => {
     return cartProducts.reduce((acc, { productId, qty }) => {
       const product = getProductById(productId);
       if (product) {
@@ -85,7 +85,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         shouldDisplayCart,
         addToCart,
         removeFromCart,
-        getCartTotal,
+        getCartSubTotal,
         increaseQty,
         decreaseQty,
       }}
