@@ -4,8 +4,12 @@ import { useProduct } from "../../providers/product/useProduct";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { RecommendedProducts } from "./RecommendedProducts";
 import { CartSideBar } from "./CartSideBar";
+import { useState } from "react";
+import { CreditCartPayment } from "../CreditCartPayment";
 
 export const Cart = () => {
+  const [shouldShowPayment, setShouldShowPayment] = useState(false);
+
   const { cartProducts, removeFromCart, increaseQty, decreaseQty } = useCart();
   const { getProductById } = useProduct();
 
@@ -85,8 +89,12 @@ export const Cart = () => {
           </table>
         </div>
         {/* Cart sidebar section */}
-        <CartSideBar />
+        <CartSideBar setShouldShowPayment={setShouldShowPayment} />
       </div>
+
+      {shouldShowPayment && (
+        <CreditCartPayment setShouldShowPayment={setShouldShowPayment} />
+      )}
 
       {/* recommended products section */}
       <RecommendedProducts />

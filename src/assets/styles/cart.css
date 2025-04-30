@@ -201,6 +201,10 @@
   margin-bottom: 1rem;
 }
 
+.checkout-btn:disabled {
+  background-color: grey;
+}
+
 .continue-shopping {
   display: block;
   text-align: center;

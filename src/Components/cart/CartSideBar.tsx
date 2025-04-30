@@ -3,11 +3,15 @@ import { useCart } from "../../providers/cart/useCart";
 import { useState } from "react";
 import { promoCodes } from "../../assets/globals/constants";
 
-export const CartSideBar = () => {
+type TCartSideBarProps = {
+  setShouldShowPayment: (shouldShowPayment: boolean) => void;
+};
+
+export const CartSideBar = ({ setShouldShowPayment }: TCartSideBarProps) => {
   const [hasPromoCode, setHasPromoCode] = useState<boolean>(false);
   const [promoWasTried, setPromoWasTried] = useState<boolean>(false);
   const [promoCodeInput, setPromoCodeInput] = useState("");
-  const { getCartSubTotal } = useCart();
+  const { getCartSubTotal, cartProducts } = useCart();
   const shipping = 8;
 
   const getCodeDiscount = (discountPercent: number = 0.15) => {
@@ -20,6 +24,9 @@ export const CartSideBar = () => {
   };
 
   const getCartTotal = () => {
+    if (cartProducts.length === 0) {
+      return 0;
+    }
     const total = getCartSubTotal() - getCodeDiscount() + getTaxes() + shipping;
     return total.toFixed(2);
   };
@@ -48,7 +55,9 @@ export const CartSideBar = () => {
         )}
         <div className="summary-row">
           <span>Shipping:</span>
-          <span id="shipping">${shipping.toFixed(2)}</span>
+          <span id="shipping">
+            ${cartProducts.length === 0 ? "0.00" : shipping.toFixed(2)}
+          </span>
         </div>
         <div className="summary-row">
           <span>Tax (7%):</span>
@@ -95,7 +104,14 @@ export const CartSideBar = () => {
       </div>
 
       <div className="checkout-actions">
-        <button id="checkout-btn" className="checkout-btn">
+        <button
+          id="checkout-btn"
+          disabled={cartProducts.length === 0}
+          className="checkout-btn"
+          onClick={() => {
+            setShouldShowPayment(true);
+          }}
+        >
           Proceed to Checkout
         </button>
         <Link to="/products" className="continue-shopping">
