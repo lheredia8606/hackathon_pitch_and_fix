@@ -1,4 +1,38 @@
-import { TProductCategoryProps } from "../../types/types";
+import { apiHandler } from "../../api/apiHandler";
+import { TProduct, TProductCategoryProps } from "../../types/types";
+
+//types
+export type TProductCategory =
+  | "Electronics"
+  | "Clothing"
+  | "Home & Kitchen"
+  | "Sports & Outdoors";
+
+export type TProductCategoryProps = {
+  id: string;
+  img: string;
+  alt: string;
+  category: TProductCategory;
+  linkTo: string;
+};
+
+export type TProduct = {
+  id: string;
+  image: string;
+  alterText: string;
+  tag: string;
+  title: string;
+  originalPrice: number;
+  salePrice: number;
+  ratingAvg: number;
+  ratingCount: number;
+  category: TProductCategory;
+  featured: boolean;
+};
+
+//globals
+const baseUrl = "http://localhost:3000/";
+export const apiProducts = apiHandler<TProduct>(baseUrl, "products");
 
 export const allCategories: TProductCategoryProps[] = [
   {

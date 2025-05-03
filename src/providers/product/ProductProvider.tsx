@@ -1,65 +1,25 @@
-import { useState } from "react";
-import { TProduct } from "../../types/types";
+import { useEffect, useState } from "react";
 import { ReactNode } from "@tanstack/react-router";
 import { ProductContext } from "./useProduct";
-
-const productsArr: TProduct[] = [
-  {
-    id: "asad",
-    alterText: "Product 1",
-    image: "/src/assets/images/headphone.png",
-    originalPrice: 120,
-    ratingAvg: 4.5,
-    ratingCount: 42,
-    salePrice: 99.99,
-    tag: "Sale",
-    title: "Wireless Headphones",
-    category: "Sports & Outdoors",
-    featured: true,
-  },
-  {
-    id: "rertt",
-    alterText: "Product 2",
-    image: "/src/assets/images/smartwatch.png",
-    originalPrice: 0,
-    ratingAvg: 5,
-    ratingCount: 28,
-    salePrice: 199.99,
-    tag: "",
-    title: "Smart Watch",
-    category: "Sports & Outdoors",
-    featured: true,
-  },
-  {
-    id: "adaweer",
-    alterText: "Product 3",
-    image: "/src/assets/images/bluetooth_speaker.png",
-    originalPrice: 0,
-    ratingAvg: 4.5,
-    ratingCount: 17,
-    salePrice: 79.99,
-    tag: "New",
-    title: "Bluetooth Speaker",
-    category: "Electronics",
-    featured: true,
-  },
-  {
-    id: "rtyikjl",
-    alterText: "Product 4",
-    image: "/src/assets/images/laptop_bag.png",
-    originalPrice: 0,
-    ratingAvg: 5,
-    ratingCount: 35,
-    salePrice: 49.99,
-    tag: "",
-    title: "Laptop Bag",
-    category: "Electronics",
-    featured: true,
-  },
-];
+import { useQuery } from "@tanstack/react-query";
+import { apiProducts, TProduct } from "../../assets/globals/constants";
 
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
-  const [allProducts, setAllProducts] = useState<TProduct[]>(productsArr);
+  const [allProducts, setAllProducts] = useState<TProduct[]>([]);
+  const {
+    data: fetchedProducts,
+    isError: isAllProductError,
+    isLoading: isLoadingAllProducts,
+  } = useQuery({
+    queryKey: ["getAllProducts"],
+    queryFn: () => apiProducts.getAll(),
+  });
+
+  useEffect(() => {
+    if (fetchedProducts) {
+      setAllProducts(fetchedProducts);
+    }
+  }, [fetchedProducts]);
 
   const getProductById = (id: string) => {
     return allProducts.find((product) => product.id === id);
@@ -78,6 +38,8 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         setAllProducts,
         getProductsByCategory,
         getProductById,
+        isAllProductError,
+        isLoadingAllProducts,
       }}
     >
       {children}

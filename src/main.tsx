@@ -7,6 +7,7 @@ import { routeTree } from "./routeTree.gen";
 import { CartProvider } from "./providers/cart/CartProvider";
 import { ProductProvider } from "./providers/product/ProductProvider";
 import { DefaultNotFoundComponent } from "./Components/DefaultNotFoundComponent";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Create a new router instance
 const router = createRouter({
@@ -25,17 +26,21 @@ declare module "@tanstack/react-router" {
   }
 }
 
+const queryClient = new QueryClient();
+
 // Render the app
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <ProductProvider>
-        <CartProvider>
-          <RouterProvider router={router} />
-        </CartProvider>
-      </ProductProvider>
+      <QueryClientProvider client={queryClient}>
+        <ProductProvider>
+          <CartProvider>
+            <RouterProvider router={router} />
+          </CartProvider>
+        </ProductProvider>
+      </QueryClientProvider>
     </StrictMode>
   );
 }
