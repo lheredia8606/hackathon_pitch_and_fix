@@ -15,7 +15,13 @@ h2 {
   color: #333;
   font-weight: normal;
 }
+form input.border-error {
+  border: 1px solid red;
+}
 
+form input.border-error:focus {
+  border: 2px solid red;
+}
 label {
   display: block;
   margin-bottom: 6px;
@@ -78,6 +84,14 @@ label {
 .input-exp-month,
 .input-exp-month::placeholder {
   text-align: right;
+}
+
+form .exp-input-group.date-border-error {
+  border: 1px solid red;
+}
+
+form .exp-input-group.date-border-error:focus-within {
+  border: 2px solid red;
 }
 
 .buttons {

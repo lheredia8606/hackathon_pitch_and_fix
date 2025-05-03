@@ -107,7 +107,7 @@ export const CartSideBar = ({ setShouldShowPayment }: TCartSideBarProps) => {
         <button
           id="checkout-btn"
           disabled={cartProducts.length === 0}
-          className="checkout-btn"
+          className="checkout-btn disabled-btn"
           onClick={() => {
             setShouldShowPayment(true);
           }}

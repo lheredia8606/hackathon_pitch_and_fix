@@ -14,6 +14,7 @@ type TCartContextProps = {
   getCartSubTotal: () => number;
   increaseQty: (productId: string) => void;
   decreaseQty: (productId: string) => void;
+  onPurchaseHandler: () => void;
 };
 
 export const CartContext = createContext<TCartContextProps | null>(null);

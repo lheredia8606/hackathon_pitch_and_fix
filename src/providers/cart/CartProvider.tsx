@@ -76,6 +76,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }, 0.0);
   };
 
+  const onPurchaseHandler = () => {};
+
   return (
     <CartContext.Provider
       value={{
@@ -88,6 +90,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         getCartSubTotal,
         increaseQty,
         decreaseQty,
+        onPurchaseHandler,
       }}
     >
       {children}

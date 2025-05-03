@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { useCart } from "../providers/cart/useCart";
+import { useCart } from "../../providers/cart/useCart";
 import { useEffect, useRef } from "react";
-import { useProduct } from "../providers/product/useProduct";
+import { useProduct } from "../../providers/product/useProduct";
 import { useNavigate } from "@tanstack/react-router";
 
 export const DropDownCart = () => {
@@ -69,7 +69,8 @@ export const DropDownCart = () => {
           </p>
         </div>
         <button
-          className="checkout-btn"
+          className="checkout-btn disabled-btn"
+          disabled={cartProducts.length === 0}
           onClick={() => {
             setShouldDisplayCart(false);
             navigate({ to: "/cart" });
