@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
-import { TProduct } from "../../assets/globals/constants";
+import { TProduct } from "../../assets/globals/constantsAndTypes";
+import { UseMutationResult } from "@tanstack/react-query";
 
 type TProductContextProps = {
   allProducts: TProduct[];
@@ -8,6 +9,15 @@ type TProductContextProps = {
   getProductById: (id: string) => TProduct | undefined;
   isAllProductError: boolean;
   isLoadingAllProducts: boolean;
+  patchProduct: UseMutationResult<
+    TProduct,
+    Error,
+    {
+      productId: string;
+      partialProduct: Partial<Omit<TProduct, "id">>;
+    },
+    unknown
+  >;
 };
 
 export const ProductContext = createContext<TProductContextProps | null>(null);

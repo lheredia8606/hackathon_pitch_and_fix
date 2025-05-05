@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useCart } from "../../providers/cart/useCart";
 import { useState } from "react";
-import { promoCodes } from "../../assets/globals/constants";
+import { promoCodes } from "../../assets/globals/constantsAndTypes";
 
 type TCartSideBarProps = {
   setShouldShowPayment: (shouldShowPayment: boolean) => void;

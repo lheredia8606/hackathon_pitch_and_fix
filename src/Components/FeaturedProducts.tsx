@@ -10,7 +10,8 @@ export const FeaturedProducts = () => {
         {allProducts
           .filter((product) => product.featured)
           .map((product) => {
-            return <ProductCard key={product.id} product={product} />;
+            if (product.quantityInStock > 0)
+              return <ProductCard key={product.id} product={product} />;
           })}
       </div>
     </section>

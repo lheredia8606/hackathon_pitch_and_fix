@@ -1,5 +1,4 @@
 import { apiHandler } from "../../api/apiHandler";
-import { TProduct, TProductCategoryProps } from "../../types/types";
 
 //types
 export type TProductCategory =
@@ -28,6 +27,7 @@ export type TProduct = {
   ratingCount: number;
   category: TProductCategory;
   featured: boolean;
+  quantityInStock: number;
 };
 
 //globals

@@ -9,6 +9,7 @@ export const Header = () => {
   const navLi: TNavLi[] = [
     { address: "/", text: "Home" },
     { address: "/products", text: "Products" },
+    { address: "/resupply", text: "Resupply Inventory" },
     { address: "/categories", text: "Categories" },
     { address: "/about", text: "About Us" },
     { address: "/contact", text: "Contact" },

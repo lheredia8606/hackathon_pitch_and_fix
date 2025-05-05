@@ -4,7 +4,7 @@ import { useProduct } from "../product/useProduct";
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [shouldDisplayCart, setShouldDisplayCart] = useState<boolean>(false);
-  const { getProductById } = useProduct();
+  const { getProductById, patchProduct } = useProduct();
   const [cartProducts, setCartProducts] = useState<cartProduct[]>(
     (): cartProduct[] => {
       const savedCart = localStorage.getItem("shopease_cart");
@@ -38,11 +38,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   //increase product Qty
   const increaseQty = (productId: string) => {
     setCartProducts(
-      [...cartProducts].map((product) => {
-        if (product.productId === productId) {
-          product.qty += 1;
+      [...cartProducts].map((cartProduct) => {
+        if (cartProduct.productId === productId) {
+          const product = getProductById(productId);
+          if (product) {
+            cartProduct.qty =
+              product.quantityInStock > cartProduct.qty
+                ? cartProduct.qty + 1
+                : cartProduct.qty;
+          }
         }
-        return product;
+        return cartProduct;
       })
     );
   };
@@ -76,7 +82,18 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }, 0.0);
   };
 
-  const onPurchaseHandler = () => {};
+  const onPurchaseHandler = () => {
+    cartProducts.map(({ productId, qty }) => {
+      const product = getProductById(productId);
+      if (product) {
+        patchProduct.mutate({
+          productId,
+          partialProduct: { quantityInStock: product?.quantityInStock - qty },
+        });
+      }
+    });
+    setCartProducts([]);
+  };
 
   return (
     <CartContext.Provider

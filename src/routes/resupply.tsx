@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useProduct } from "../providers/product/useProduct";
 import { ProductCard } from "../Components/ProductCard";
 import { useState } from "react";
 import { allCategories } from "../assets/globals/constantsAndTypes";
-import { useProduct } from "../providers/product/useProduct";
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/resupply")({
   component: RouteComponent,
 });
 
@@ -34,8 +34,7 @@ function RouteComponent() {
       </select>
       <div className="product-grid" style={{ padding: "20px 0" }}>
         {getProductsByCategory(category).map((product) => {
-          if (product.quantityInStock > 0)
-            return <ProductCard key={product.id} product={product} />;
+          return <ProductCard key={product.id} product={product} />;
         })}
       </div>
     </>

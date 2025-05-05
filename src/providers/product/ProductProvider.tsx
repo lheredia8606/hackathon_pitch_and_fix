@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { ReactNode } from "@tanstack/react-router";
 import { ProductContext } from "./useProduct";
-import { useQuery } from "@tanstack/react-query";
-import { apiProducts, TProduct } from "../../assets/globals/constants";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { apiProducts, TProduct } from "../../assets/globals/constantsAndTypes";
 
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [allProducts, setAllProducts] = useState<TProduct[]>([]);
+  const queryClient = useQueryClient();
   const {
     data: fetchedProducts,
     isError: isAllProductError,
@@ -13,6 +14,18 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   } = useQuery({
     queryKey: ["getAllProducts"],
     queryFn: () => apiProducts.getAll(),
+  });
+
+  const patchProduct = useMutation({
+    mutationFn: ({
+      productId,
+      partialProduct,
+    }: {
+      productId: string;
+      partialProduct: Partial<Omit<TProduct, "id">>;
+    }) => apiProducts.update(productId, partialProduct),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["getAllProducts"] }),
   });
 
   useEffect(() => {
@@ -31,6 +44,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
       return allProducts.filter((product) => product.category === category);
     }
   };
+
   return (
     <ProductContext.Provider
       value={{
@@ -40,6 +54,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
         getProductById,
         isAllProductError,
         isLoadingAllProducts,
+        patchProduct,
       }}
     >
       {children}

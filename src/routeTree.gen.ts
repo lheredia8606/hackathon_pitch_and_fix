@@ -11,12 +11,19 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ResupplyImport } from './routes/resupply'
 import { Route as ProductsImport } from './routes/products'
 import { Route as CartImport } from './routes/cart'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const ResupplyRoute = ResupplyImport.update({
+  id: '/resupply',
+  path: '/resupply',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ProductsRoute = ProductsImport.update({
   id: '/products',
@@ -74,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsImport
       parentRoute: typeof rootRoute
     }
+    '/resupply': {
+      id: '/resupply'
+      path: '/resupply'
+      fullPath: '/resupply'
+      preLoaderRoute: typeof ResupplyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -84,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
   '/products': typeof ProductsRoute
+  '/resupply': typeof ResupplyRoute
 }
 
 export interface FileRoutesByTo {
@@ -91,6 +106,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
   '/products': typeof ProductsRoute
+  '/resupply': typeof ResupplyRoute
 }
 
 export interface FileRoutesById {
@@ -99,14 +115,15 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
   '/products': typeof ProductsRoute
+  '/resupply': typeof ResupplyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/cart' | '/products'
+  fullPaths: '/' | '/about' | '/cart' | '/products' | '/resupply'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/cart' | '/products'
-  id: '__root__' | '/' | '/about' | '/cart' | '/products'
+  to: '/' | '/about' | '/cart' | '/products' | '/resupply'
+  id: '__root__' | '/' | '/about' | '/cart' | '/products' | '/resupply'
   fileRoutesById: FileRoutesById
 }
 
@@ -115,6 +132,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   CartRoute: typeof CartRoute
   ProductsRoute: typeof ProductsRoute
+  ResupplyRoute: typeof ResupplyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -122,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   CartRoute: CartRoute,
   ProductsRoute: ProductsRoute,
+  ResupplyRoute: ResupplyRoute,
 }
 
 export const routeTree = rootRoute
@@ -137,7 +156,8 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/cart",
-        "/products"
+        "/products",
+        "/resupply"
       ]
     },
     "/": {
@@ -151,6 +171,9 @@ export const routeTree = rootRoute
     },
     "/products": {
       "filePath": "products.tsx"
+    },
+    "/resupply": {
+      "filePath": "resupply.tsx"
     }
   }
 }

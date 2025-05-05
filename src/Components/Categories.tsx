@@ -1,4 +1,4 @@
-import { allCategories } from "../assets/globals/constants";
+import { allCategories } from "../assets/globals/constantsAndTypes";
 import { CategoriesCard } from "./CategoriesCard";
 
 export const Categories = () => {

@@ -11,7 +11,8 @@
       "tag": "Sale",
       "title": "Wireless Headphones",
       "category": "Sports & Outdoors",
-      "featured": true
+      "featured": true,
+      "quantityInStock": 0
     },
     {
       "id": "rertt",
@@ -24,7 +25,8 @@
       "tag": "",
       "title": "Smart Watch",
       "category": "Sports & Outdoors",
-      "featured": true
+      "featured": true,
+      "quantityInStock": 7
     },
     {
       "id": "adaweer",
@@ -37,7 +39,8 @@
       "tag": "New",
       "title": "Bluetooth Speaker",
       "category": "Electronics",
-      "featured": true
+      "featured": true,
+      "quantityInStock": 10
     },
     {
       "id": "rtyikjl",
@@ -50,7 +53,8 @@
       "tag": "",
       "title": "Laptop Bag",
       "category": "Electronics",
-      "featured": true
+      "featured": true,
+      "quantityInStock": 10
     }
   ]
 }

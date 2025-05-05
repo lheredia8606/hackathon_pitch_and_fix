@@ -46,6 +46,9 @@ export const Cart = () => {
                           <h3>{product.title}</h3>
                           {/* change hardcoded black */}
                           <p className="product-variant">Color: Black</p>
+                          <p className="product-variant">
+                            in Stock: {product.quantityInStock}
+                          </p>
                         </div>
                       </td>
                       <td className="product-price">{product.salePrice}</td>
