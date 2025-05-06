@@ -50,10 +50,7 @@ function RouteComponent() {
     if (!isProductInInventory(productId)) {
       const product = getProductById(productId);
       if (product) {
-        setInventoryProducts([
-          ...inventoryProducts,
-          { productId, qty: product.quantityInStock },
-        ]);
+        setInventoryProducts([...inventoryProducts, { productId, qty: 0 }]);
       }
     }
   };

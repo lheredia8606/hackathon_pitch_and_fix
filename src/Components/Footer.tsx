@@ -6,6 +6,7 @@ import {
   IconDefinition,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "@tanstack/react-router";
 
 type TColumnRow = {
   ref: string;
@@ -20,8 +21,8 @@ const columns: TColumn[] = [
   {
     columnName: "Shop",
     rows: [
-      { ref: "pages/products.html", rowName: "All Products" },
-      { ref: "pages/categories.html", rowName: "Categories" },
+      { ref: "/products", rowName: "All Products" },
+      { ref: "/categories", rowName: "Categories" },
       { ref: "pages/deals.html", rowName: "Deals" },
       { ref: "pages/new-arrivals.html", rowName: "New Arrivals" },
     ],
@@ -66,10 +67,10 @@ export const Footer = () => {
                 {column.rows.map((row, index) => {
                   return (
                     <li key={column.columnName + index}>
-                      <a href={row.ref}>
+                      <Link to={row.ref}>
                         {row.icon && <FontAwesomeIcon icon={row.icon} />}
                         {row.rowName}
-                      </a>
+                      </Link>
                     </li>
                   );
                 })}

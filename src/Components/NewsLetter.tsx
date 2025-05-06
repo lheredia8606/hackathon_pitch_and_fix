@@ -20,10 +20,10 @@ export const NewsLetter = () => {
 
   return (
     <section className="newsletter">
-      <div className="newsletter-content">
-        <h2>Subscribe to Our Newsletter</h2>
-        <p>Get updates on new products, special offers, and more.</p>
-        {!isSubscribed && (
+      {!isSubscribed && (
+        <div className="newsletter-content">
+          <h2>Subscribe to Our Newsletter</h2>
+          <p>Get updates on new products, special offers, and more.</p>
           <form id="newsletter-form" onSubmit={handleOnSubmit}>
             <input
               className={
@@ -40,16 +40,16 @@ export const NewsLetter = () => {
             />
             <button type="submit">Subscribe</button>
           </form>
-        )}
-        {!isEmailValid(emailInput) && triedToSubscribe && !isSubscribed && (
-          <div className="error-message">
-            Please enter a valid email address.
-          </div>
-        )}
-        {isSubscribed && (
-          <div id="newsletter-success">Thank you for subscribing!</div>
-        )}
-      </div>
+          {!isEmailValid(emailInput) && triedToSubscribe && !isSubscribed && (
+            <div className="error-message">
+              Please enter a valid email address.
+            </div>
+          )}
+        </div>
+      )}
+      {isSubscribed && (
+        <div id="newsletter-success">Thank you for subscribing!</div>
+      )}
     </section>
   );
 };

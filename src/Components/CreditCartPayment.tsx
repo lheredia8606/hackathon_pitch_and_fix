@@ -1,6 +1,7 @@
 import { ChangeEvent, useRef, useState } from "react";
 import "/src/assets/styles/credit-cart.css";
 import { useCart } from "../providers/cart/useCart";
+import { useRouter } from "@tanstack/react-router";
 
 type TCreditCartPaymentProps = {
   setShouldShowPayment: (showPayment: boolean) => void;
@@ -9,6 +10,7 @@ type TCreditCartPaymentProps = {
 export const CreditCartPayment = ({
   setShouldShowPayment,
 }: TCreditCartPaymentProps) => {
+  const router = useRouter();
   const { onPurchaseHandler } = useCart();
   const [cardInput, setCardInput] = useState<string[]>(["", "", "", ""]);
   const [cardHolder, setCardHolder] = useState("");
@@ -152,6 +154,7 @@ export const CreditCartPayment = ({
       setWasSubmitted(true);
     } else {
       onPurchaseHandler();
+      router.navigate({ to: "/" });
       setShouldShowPayment(false);
     }
   };

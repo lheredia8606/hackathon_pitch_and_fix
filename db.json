@@ -12,7 +12,7 @@
       "title": "Wireless Headphones",
       "category": "Sports & Outdoors",
       "featured": true,
-      "quantityInStock": 0
+      "quantityInStock": 4
     },
     {
       "id": "rertt",
@@ -26,7 +26,7 @@
       "title": "Smart Watch",
       "category": "Sports & Outdoors",
       "featured": true,
-      "quantityInStock": 2
+      "quantityInStock": 5
     },
     {
       "id": "adaweer",
@@ -40,7 +40,7 @@
       "title": "Bluetooth Speaker",
       "category": "Electronics",
       "featured": true,
-      "quantityInStock": 10
+      "quantityInStock": 5
     },
     {
       "id": "rtyikjl",
@@ -54,7 +54,7 @@
       "title": "Laptop Bag",
       "category": "Electronics",
       "featured": true,
-      "quantityInStock": 10
+      "quantityInStock": 11
     },
     {
       "id": "asbnrd",
@@ -68,7 +68,7 @@
       "title": "Hp Lap-top",
       "category": "Electronics",
       "featured": false,
-      "quantityInStock": 10
+      "quantityInStock": 13
     },
     {
       "id": "asqwbnw",
@@ -82,7 +82,7 @@
       "title": "Socks",
       "category": "Clothing",
       "featured": false,
-      "quantityInStock": 10
+      "quantityInStock": 13
     },
     {
       "id": "lkfdqzd",
@@ -96,7 +96,7 @@
       "title": "Umbrella",
       "category": "Clothing",
       "featured": false,
-      "quantityInStock": 10
+      "quantityInStock": 13
     },
     {
       "id": "gf5cva",
@@ -110,7 +110,7 @@
       "title": "Soccer Ball",
       "category": "Sports & Outdoors",
       "featured": false,
-      "quantityInStock": 10
+      "quantityInStock": 11
     },
     {
       "id": "edxsol0",
@@ -124,7 +124,7 @@
       "title": "Electric Range",
       "category": "Home & Kitchen",
       "featured": false,
-      "quantityInStock": 10
+      "quantityInStock": 14
     },
     {
       "id": "edfg560l0",
@@ -138,7 +138,7 @@
       "title": "Utensil Set",
       "category": "Home & Kitchen",
       "featured": false,
-      "quantityInStock": 10
+      "quantityInStock": 15
     }
   ]
 }
