@@ -6,6 +6,8 @@ import {
   allCategories,
   TProductQty,
 } from "../assets/globals/constantsAndTypes";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 export const Route = createFileRoute("/resupply")({
   component: RouteComponent,
@@ -26,6 +28,18 @@ function RouteComponent() {
         });
     });
     setInventoryProducts([]);
+  };
+
+  /**
+   * remove a product from inventory
+   * @param id
+   */
+  const removeFromInventory = (id: string) => {
+    setInventoryProducts(
+      [...inventoryProducts].filter((product) => {
+        return product.productId !== id;
+      })
+    );
   };
 
   /**
@@ -85,80 +99,93 @@ function RouteComponent() {
   };
   return (
     <>
-      {inventoryProducts.length > 0 && (
-        <div className="inventory-table-container">
-          <table className="cart-table">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody id="cart-items-list">
-              {inventoryProducts.map(({ productId, qty }) => {
-                const product = getProductById(productId);
-                if (product) {
-                  return (
-                    <tr className="cart-item" key={productId}>
-                      <td className="product-info">
-                        <div className="product-details">
-                          <h3>{product.title}</h3>
-                        </div>
-                      </td>
-                      <td className="product-quantity">
-                        <div className="quantity-controls">
-                          <button
-                            className="quantity-decrease"
-                            onClick={() => {
-                              updateQty(product.id, -1);
-                            }}
-                          >
-                            -
+      <div className="inventory-table-wrapper">
+        {inventoryProducts.length > 0 && (
+          <div className="inventory-table-container">
+            <table className="cart-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="cart-items-list">
+                {inventoryProducts.map(({ productId, qty }) => {
+                  const product = getProductById(productId);
+                  if (product) {
+                    return (
+                      <tr className="cart-item" key={productId}>
+                        <td className="product-info">
+                          <div className="product-details">
+                            <h3>{product.title}</h3>
+                          </div>
+                        </td>
+                        <td className="product-quantity">
+                          <div className="quantity-controls">
+                            <button
+                              className="quantity-decrease"
+                              onClick={() => {
+                                updateQty(product.id, -1);
+                              }}
+                            >
+                              -
+                            </button>
+                            <input
+                              value={qty}
+                              className="quantity-input"
+                              readOnly
+                            />
+                            <button
+                              className="quantity-increase"
+                              onClick={() => {
+                                updateQty(product.id, 1);
+                              }}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                        <td className="product-actions">
+                          <button className="remove-item-btn">
+                            <FontAwesomeIcon
+                              icon={faTrashAlt}
+                              onClick={() => removeFromInventory(productId)}
+                            />
                           </button>
-                          <input
-                            value={qty}
-                            className="quantity-input"
-                            readOnly
-                          />
-                          <button
-                            className="quantity-increase"
-                            onClick={() => {
-                              updateQty(product.id, 1);
-                            }}
-                          >
-                            +
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                }
-              })}
-            </tbody>
-          </table>
-          <button
-            className="add-to-cart-btn"
-            onClick={() => updateProductsQty()}
-          >
-            Update quantities
-          </button>
-        </div>
-      )}
-      <label htmlFor="categories">Category: </label>
-      <select
-        id="categories"
-        name="categories"
-        onChange={(e) => handleSelectOnChange(e)}
-      >
-        <option value="All">All</option>
-        {allCategories.map((category) => {
-          return (
-            <option key={category.id} value={category.category}>
-              {category.category}
-            </option>
-          );
-        })}
-      </select>
+                        </td>
+                      </tr>
+                    );
+                  }
+                })}
+              </tbody>
+            </table>
+            <button
+              className="add-to-cart-btn"
+              onClick={() => updateProductsQty()}
+            >
+              Update quantities
+            </button>
+          </div>
+        )}
+      </div>
+      <div className="category-selector">
+        <label htmlFor="categories">Category: </label>
+        <select
+          id="categories"
+          name="categories"
+          onChange={(e) => handleSelectOnChange(e)}
+        >
+          <option value="All">All</option>
+          {allCategories.map((category) => {
+            return (
+              <option key={category.id} value={category.category}>
+                {category.category}
+              </option>
+            );
+          })}
+        </select>
+      </div>
 
       <div className="product-grid" style={{ padding: "20px 0" }}>
         {getProductsByCategory(category).map((product) => {

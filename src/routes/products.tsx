@@ -19,21 +19,23 @@ function RouteComponent() {
   };
   return (
     <>
-      <label htmlFor="categories">Category: </label>
-      <select
-        id="categories"
-        name="categories"
-        onChange={(e) => handleSelectOnChange(e)}
-      >
-        <option value="All">All</option>
-        {allCategories.map((category) => {
-          return (
-            <option key={category.id} value={category.category}>
-              {category.category}
-            </option>
-          );
-        })}
-      </select>
+      <div className="category-selector">
+        <label htmlFor="categories">Category: </label>
+        <select
+          id="categories"
+          name="categories"
+          onChange={(e) => handleSelectOnChange(e)}
+        >
+          <option value="All">All</option>
+          {allCategories.map((category) => {
+            return (
+              <option key={category.id} value={category.category}>
+                {category.category}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <div className="product-grid" style={{ padding: "20px 0" }}>
         {getProductsByCategory(category).map((product) => {
           if (product.quantityInStock > 0)

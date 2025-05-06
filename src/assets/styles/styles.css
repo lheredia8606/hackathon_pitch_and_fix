@@ -220,17 +220,32 @@ header {
   margin-bottom: 2rem;
 }
 
+.category-selector {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.category-selector label {
+  margin-right: 10px;
+}
+
 .product-grid,
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20pxs;
 }
 
 .product-card {
+  min-width: 220px;
   border: 1px solid #eee;
   border-radius: 8px;
   overflow: hidden;
+  margin: auto;
   transition:
     transform 0.3s,
     box-shadow 0.3s;
@@ -318,6 +333,10 @@ header {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.inventory-table-wrapper .add-to-cart-btn {
+  max-width: 200px;
 }
 
 .add-to-cart-btn:hover {

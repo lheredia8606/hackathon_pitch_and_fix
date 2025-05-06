@@ -61,7 +61,7 @@
 }
 
 .cart-table td {
-  justify-content: center;
+  text-align: center;
   padding: 40pxrem;
   border-bottom: 1px solid #eee;
   vertical-align: middle;
