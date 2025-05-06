@@ -1,12 +1,9 @@
 import { createContext, useContext } from "react";
+import { TProductQty } from "../../assets/globals/constantsAndTypes";
 
-export type cartProduct = {
-  productId: string;
-  qty: number;
-};
 type TCartContextProps = {
-  cartProducts: cartProduct[];
-  setCartProducts: (products: cartProduct[]) => void;
+  cartProducts: TProductQty[];
+  setCartProducts: (products: TProductQty[]) => void;
   shouldDisplayCart: boolean;
   setShouldDisplayCart: (display: boolean) => void;
   addToCart: (productId: string) => void;

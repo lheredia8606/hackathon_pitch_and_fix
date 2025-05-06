@@ -3,6 +3,7 @@ import { ProductCard } from "../Components/ProductCard";
 import { useState } from "react";
 import { allCategories } from "../assets/globals/constantsAndTypes";
 import { useProduct } from "../providers/product/useProduct";
+import { useCart } from "../providers/cart/useCart";
 
 export const Route = createFileRoute("/products")({
   component: RouteComponent,
@@ -11,6 +12,7 @@ export const Route = createFileRoute("/products")({
 function RouteComponent() {
   const [category, setCategory] = useState("All");
   const { getProductsByCategory } = useProduct();
+  const { addToCart } = useCart();
 
   const handleSelectOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
@@ -35,7 +37,14 @@ function RouteComponent() {
       <div className="product-grid" style={{ padding: "20px 0" }}>
         {getProductsByCategory(category).map((product) => {
           if (product.quantityInStock > 0)
-            return <ProductCard key={product.id} product={product} />;
+            return (
+              <ProductCard
+                key={product.id}
+                product={product}
+                btnOnClick={addToCart}
+                btnText={"Add to Cart"}
+              />
+            );
         })}
       </div>
     </>

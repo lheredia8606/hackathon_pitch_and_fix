@@ -150,9 +150,7 @@ export const CreditCartPayment = ({
     e.preventDefault();
     if (!isFormValid()) {
       setWasSubmitted(true);
-      console.log("not submitting");
     } else {
-      console.log("submitting");
       onPurchaseHandler();
       setShouldShowPayment(false);
     }

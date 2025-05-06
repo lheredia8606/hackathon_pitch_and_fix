@@ -1,12 +1,13 @@
 import { ReactNode, useEffect, useState } from "react";
-import { CartContext, cartProduct } from "./useCart";
+import { CartContext } from "./useCart";
 import { useProduct } from "../product/useProduct";
+import { TProductQty } from "../../assets/globals/constantsAndTypes";
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [shouldDisplayCart, setShouldDisplayCart] = useState<boolean>(false);
   const { getProductById, patchProduct } = useProduct();
-  const [cartProducts, setCartProducts] = useState<cartProduct[]>(
-    (): cartProduct[] => {
+  const [cartProducts, setCartProducts] = useState<TProductQty[]>(
+    (): TProductQty[] => {
       const savedCart = localStorage.getItem("shopease_cart");
       if (savedCart) {
         return JSON.parse(savedCart);
@@ -88,7 +89,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       if (product) {
         patchProduct.mutate({
           productId,
-          partialProduct: { quantityInStock: product?.quantityInStock - qty },
+          partialProduct: { quantityInStock: product.quantityInStock - qty },
         });
       }
     });

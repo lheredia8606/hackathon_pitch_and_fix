@@ -1,7 +1,4 @@
-/* Responsive Styles */
-
-/* Tablet Styles */
-@media screen and (max-width: 968px) {
+/* @media screen and (max-width: 968px) {
   .product-grid,
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -12,7 +9,6 @@
   }
 }
 
-/* Mobile Styles */
 @media screen and (max-width: 576px) {
   .hero h1 {
     font-size: 2rem;
@@ -41,4 +37,4 @@
 
   .newsletter button {
   }
-}
+} */

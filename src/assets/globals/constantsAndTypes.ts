@@ -1,6 +1,12 @@
 import { apiHandler } from "../../api/apiHandler";
 
 //types
+
+export type TProductQty = {
+  productId: string;
+  qty: number;
+};
+
 export type TProductCategory =
   | "Electronics"
   | "Clothing"

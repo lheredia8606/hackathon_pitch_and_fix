@@ -2,11 +2,12 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar as faStarEmpty } from "@fortawesome/free-regular-svg-icons";
 import { faStar, faStarHalf } from "@fortawesome/free-solid-svg-icons";
-import { TProduct } from "../types/types";
-import { useCart } from "../providers/cart/useCart";
+import { TProduct } from "../assets/globals/constantsAndTypes";
 
 type TProductCardProps = {
   product: TProduct;
+  btnText: string;
+  btnOnClick: (id: string) => void;
 };
 
 export const ProductCard = ({
@@ -21,8 +22,10 @@ export const ProductCard = ({
     title,
     id,
   },
+  btnText,
+  btnOnClick,
 }: TProductCardProps) => {
-  const { addToCart } = useCart();
+  //const { addToCart } = useCart();
 
   const getRatingFullStars = (rating: number) => {
     return (
@@ -65,8 +68,14 @@ export const ProductCard = ({
 
           <span className="rating-count">({ratingCount})</span>
         </div>
-        <button className="add-to-cart-btn" onClick={() => addToCart(id)}>
-          Add to Cart
+        <button
+          className="add-to-cart-btn"
+          onClick={() => {
+            //addToCart(id);
+            btnOnClick(id);
+          }}
+        >
+          {btnText}
         </button>
       </div>
     </div>

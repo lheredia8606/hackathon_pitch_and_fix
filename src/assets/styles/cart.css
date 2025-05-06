@@ -37,19 +37,32 @@
   flex: 2;
 }
 
+.inventory-table-container {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inventory-table-container .add-to-cart-btn {
+  margin: 30px 0;
+}
+
 .cart-table {
   width: 100%;
   border-collapse: collapse;
 }
 
 .cart-table th {
-  text-align: left;
+  text-align: center;
   padding: 1rem;
   border-bottom: 2px solid #ddd;
 }
 
 .cart-table td {
-  padding: 1rem;
+  justify-content: center;
+  padding: 40pxrem;
   border-bottom: 1px solid #eee;
   vertical-align: middle;
 }

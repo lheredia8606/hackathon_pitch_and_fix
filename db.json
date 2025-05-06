@@ -26,7 +26,7 @@
       "title": "Smart Watch",
       "category": "Sports & Outdoors",
       "featured": true,
-      "quantityInStock": 7
+      "quantityInStock": 2
     },
     {
       "id": "adaweer",
@@ -54,6 +54,90 @@
       "title": "Laptop Bag",
       "category": "Electronics",
       "featured": true,
+      "quantityInStock": 10
+    },
+    {
+      "id": "asbnrd",
+      "alterText": "Product 5",
+      "image": "/src/assets/images/black_laptop.png",
+      "originalPrice": 899.99,
+      "ratingAvg": 4.5,
+      "ratingCount": 67,
+      "salePrice": 679.99,
+      "tag": "Sale",
+      "title": "Hp Lap-top",
+      "category": "Electronics",
+      "featured": false,
+      "quantityInStock": 10
+    },
+    {
+      "id": "asqwbnw",
+      "alterText": "Product 6",
+      "image": "/src/assets/images/black_socks.png",
+      "originalPrice": 0,
+      "ratingAvg": 2.5,
+      "ratingCount": 21,
+      "salePrice": 4.99,
+      "tag": "",
+      "title": "Socks",
+      "category": "Clothing",
+      "featured": false,
+      "quantityInStock": 10
+    },
+    {
+      "id": "lkfdqzd",
+      "alterText": "Product 7",
+      "image": "/src/assets/images/black_umbrella.png",
+      "originalPrice": 0,
+      "ratingAvg": 4,
+      "ratingCount": 31,
+      "salePrice": 8.99,
+      "tag": "",
+      "title": "Umbrella",
+      "category": "Clothing",
+      "featured": false,
+      "quantityInStock": 10
+    },
+    {
+      "id": "gf5cva",
+      "alterText": "Product 8",
+      "image": "/src/assets/images/soccer_ball.png",
+      "originalPrice": 0,
+      "ratingAvg": 5,
+      "ratingCount": 81,
+      "salePrice": 29.99,
+      "tag": "",
+      "title": "Soccer Ball",
+      "category": "Sports & Outdoors",
+      "featured": false,
+      "quantityInStock": 10
+    },
+    {
+      "id": "edxsol0",
+      "alterText": "Product 9",
+      "image": "/src/assets/images/electric_range.png",
+      "originalPrice": 0,
+      "ratingAvg": 5,
+      "ratingCount": 28,
+      "salePrice": 648.99,
+      "tag": "",
+      "title": "Electric Range",
+      "category": "Home & Kitchen",
+      "featured": false,
+      "quantityInStock": 10
+    },
+    {
+      "id": "edfg560l0",
+      "alterText": "Product 10",
+      "image": "/src/assets/images/utensil_set.png",
+      "originalPrice": 0,
+      "ratingAvg": 4,
+      "ratingCount": 57,
+      "salePrice": 5.99,
+      "tag": "",
+      "title": "Utensil Set",
+      "category": "Home & Kitchen",
+      "featured": false,
       "quantityInStock": 10
     }
   ]

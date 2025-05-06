@@ -1,4 +1,4 @@
-import { TProductCategoryProps } from "../types/types";
+import { TProductCategoryProps } from "../assets/globals/constantsAndTypes";
 
 type TCategoriesCardProps = {
   cardProps: TProductCategoryProps;
